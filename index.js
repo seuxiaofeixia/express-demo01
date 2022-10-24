@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+var request = require('request-promise')
 const { init: initDB, Counter } = require("./db");
 
 const logger = morgan("tiny");
@@ -15,6 +16,23 @@ app.use(logger);
 // 首页
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
+  var url = 'https://7775-wudi-4gesy1v7b445d3d9-1257473911.tcb.qcloud.la/cos.jpeg'
+  var rsp = await request({
+      timeout:5000,   
+      method:'GET',
+      url:url,
+
+  },function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          console.log(body);
+
+      }else{
+          console.log("error");
+      }
+  });
+  console.log("***************")
+  console.log(rsp)
+  console.log("***************")
 });
 
 // 更新计数
