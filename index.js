@@ -16,6 +16,22 @@ app.use(logger);
 // 首页
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// 更新计数
+app.post("/api/count", async (req, res) => {
+//   const { action } = req.body;
+//   if (action === "inc") {
+//     await Counter.create();
+//   } else if (action === "clear") {
+//     await Counter.destroy({
+//       truncate: true,
+//     });
+//   }
+//   res.send({
+//     code: 0,
+//     data: await Counter.count(),
+//   });
   var url = 'https://7775-wudi-4gesy1v7b445d3d9-1257473911.tcb.qcloud.la/cos.jpeg'
   var rsp = await request({
       timeout:5000,   
@@ -33,22 +49,6 @@ app.get("/", async (req, res) => {
   console.log("***************")
   console.log(rsp)
   console.log("***************")
-});
-
-// 更新计数
-app.post("/api/count", async (req, res) => {
-  const { action } = req.body;
-  if (action === "inc") {
-    await Counter.create();
-  } else if (action === "clear") {
-    await Counter.destroy({
-      truncate: true,
-    });
-  }
-  res.send({
-    code: 0,
-    data: await Counter.count(),
-  });
 });
 
 // 获取计数
